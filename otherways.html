@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>visibility: other ways</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href="assets/stylesheets/prism.css" rel="stylesheet">
+    <link href="assets/stylesheets/stylesheet.css" rel="stylesheet">
+  </head>
+  <body class="css-hover no-outline">
+        <a class="screen-read skip-link" href="#a11ynav" id="problematic">skip to accessible navigation</a>
+    <div class="container">
+    <nav class="topnav navbar otherways" role="navigation">
+        <ul class="nav">
+            <li>
+                <a href="index">Home</a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Visibility</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="whatvisibility">the outline thing</a>
+                    </li>
+                    <li>
+                        <a href="visiblevisibility">the outline thing done properly</a>
+                    </li>
+                    <li>
+                        <a href="otherways">other ways</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Focusability</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="thecss">the css dropdown</a>
+                    </li>
+                    <li>
+                        <a href="premenufocusable">a first focusable dropdown</a>
+                    </li>
+                    <li>
+                        <a href="menufocusable">the definitive focusable dropdown</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Shortcuts</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="brokenskip">the broken skip link</a>
+                    </li>
+                    <li>
+                        <a href="workingskip">the working skip link</a>
+                    </li>
+                    <li>
+                        <a href="skipimproved">a further improvement?</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <main id="main-content" class="no-outline text-body" tabindex="-1">
+        <h1>another approach to focus styling</h1>
+        <p>Outlines are not the only way to go for focus styles. You probably already have some styles for the hover state; these can easily be adopted for focus too. That will give mouse and keyboard navigators a consistent experience.</p>
+
+    <div class="code-view">
+        <pre><code class="language-scss">.nav li a:hover,
+.nav li a:focus {
+    background-color: #23527c;
+    color: #fff;
+}</code></pre>
+    </div>
+    <p>If you tab through the navigation above, you'll see now the hover styles are also being applied on focus. But what about the dropdowns? There's still not showing. We'll have a look at that in the next section.</p>
+    </main>
+    <div class="pagination">
+        <a class="previous" href="visiblevisibility">previous page</a>
+        <a class="next" href="thecss">next page</a>
+    </div>
+    <nav class="bottomnav otherways working-menu no-outline" id="a11ynav" tabindex="0">
+        <ul class="nav">
+            <li>
+                <a href="index">Home</a>
+            </li>
+            <li class="">
+                <a class="dropdown-toggle" href="#">Visibility</a>
+                <ul class="sub-nav">
+                    <li>
+                        <a href="whatvisibility">the outline thing</a>
+                    </li>
+                    <li>
+                        <a href="visiblevisibility">the outline thing done properly</a>
+                    </li>
+                    <li>
+                        <a href="otherways">other ways</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a class="dropdown-toggle" href="#">Focusability</a>
+                <ul class="sub-nav">
+                    <li>
+                        <a href="thecss">the css dropdown</a>
+                    </li>
+                    <li>
+                        <a href="premenufocusable">a first focusable dropdown</a>
+                    </li>
+                    <li>
+                        <a href="menufocusable">the definitive focusable dropdown</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a class="dropdown-toggle" href="#">Shortcuts</a>
+                <ul class="sub-nav">
+                    <li>
+                        <a href="brokenskip">the broken skip link</a>
+                    </li>
+                    <li>
+                        <a href="workingskip">the working skip link</a>
+                    </li>
+                    <li>
+                        <a href="skipimproved">a further improvement?</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+
+    <script src="assets/scripts/libs/jquery-1.11.3.min.js"></script>
+    <script src="assets/scripts/libs/prism.js"></script>
+    <script>
+    $("#problematic").on('click', function(){
+        $(".bottomnav").addClass("focus");
+    });
+    $(".bottomnav").on('keydown', function(){
+        $(this).addClass("focus");
+    });
+    </script>
+  </body>
+</html>

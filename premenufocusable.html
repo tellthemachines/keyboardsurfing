@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>javascript dropdowns</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href="assets/stylesheets/prism.css" rel="stylesheet">
+    <link href="assets/stylesheets/stylesheet.css" rel="stylesheet">
+
+  </head>
+  <body class="jsdn-menu css-hover no-outline">
+      <a class="screen-read skip-link" href="#a11ynav" id="problematic">skip to accessible navigation</a>
+    <div class="container">
+    <nav class="topnav navbar otherways" role="navigation">
+        <ul class="nav">
+            <li>
+                <a href="index">Home</a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Visibility</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="whatvisibility">the outline thing</a>
+                    </li>
+                    <li>
+                        <a href="visiblevisibility">the outline thing done properly</a>
+                    </li>
+                    <li>
+                        <a href="otherways">other ways</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Focusability</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="thecss">the css dropdown</a>
+                    </li>
+                    <li>
+                        <a href="premenufocusable">a first focusable dropdown</a>
+                    </li>
+                    <li>
+                        <a href="menufocusable">the definitive focusable dropdown</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Shortcuts</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="brokenskip">the broken skip link</a>
+                    </li>
+                    <li>
+                        <a href="workingskip">the working skip link</a>
+                    </li>
+                    <li>
+                        <a href="skipimproved">a further improvement?</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <main id="main-content" class="no-outline text-body" tabindex="-1">
+        <h1>The JS solution</h1>
+        <p>There's no way around this without using a bit of JavaScript. Here goes, in jQuery flavour for ease of reading:</p>
+<div class="code-view">
+<pre><code class="language-js">$("li")
+    .find("a")
+    .on("focus blur", function() {
+        $(this)
+            .parents("li")
+            .toggleClass("focus");
+    });</code></pre>
+</div>
+    <p>What we need to do is find all the anchors inside list elements (this will apply both to the parent and child anchors in the menu) and, when their focus state changes, toggle a class on the list element that contains the dropdown. We then attach our styles to that class.</p>
+<div class="code-view">
+<pre><code class="language-scss">li ul {
+    display: none;
+}
+li:hover ul,
+li.focus ul {
+    display: block;
+}</code></pre>
+</div>
+
+    <p>But wait, let's try this. Depending on your browser, you may have the keyboard trap (Chrome), the dropdowns opening and closing without giving access to their child links (Firefox), or everything working as expected (Safari).</p>
+    <p>Once again, the culprit is <code class="language-scss">display: none;</code>. </p>
+</main>
+<div class="pagination">
+    <a class="previous" href="thecss">previous page</a>
+    <a class="next" href="menufocusable">next page</a>
+</div>
+<nav class="bottomnav otherways working-menu" id="a11ynav" tabindex="0">
+    <ul class="nav">
+        <li>
+            <a href="index">Home</a>
+        </li>
+        <li class="">
+            <a class="dropdown-toggle" href="#">Visibility</a>
+            <ul class="sub-nav">
+                <li>
+                    <a href="whatvisibility">the outline thing</a>
+                </li>
+                <li>
+                    <a href="visiblevisibility">the outline thing done properly</a>
+                </li>
+                <li>
+                    <a href="otherways">other ways</a>
+                </li>
+            </ul>
+        </li>
+        <li class="">
+            <a class="dropdown-toggle" href="#">Focusability</a>
+            <ul class="sub-nav">
+                <li>
+                    <a href="thecss">the css dropdown</a>
+                </li>
+                <li>
+                    <a href="premenufocusable">a first focusable dropdown</a>
+                </li>
+                <li>
+                    <a href="menufocusable">the definitive focusable dropdown</a>
+                </li>
+            </ul>
+        </li>
+        <li class="">
+            <a class="dropdown-toggle" href="#">Shortcuts</a>
+            <ul class="sub-nav">
+                <li>
+                    <a href="brokenskip">the broken skip link</a>
+                </li>
+                <li>
+                    <a href="workingskip">the working skip link</a>
+                </li>
+                <li>
+                    <a href="skipimproved">a further improvement?</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+</div>
+
+    <script src="assets/scripts/libs/jquery-1.11.3.min.js"></script>
+    <script src="assets/scripts/libs/prism.js"></script>
+    <script>
+    $(".dropdown").find("a").on("focus blur", function() {
+        $(this).parents(".dropdown").toggleClass("focus");
+    });
+    $("#problematic").on('click', function(){
+        $(".bottomnav").addClass("focus");
+    });
+    $(".bottomnav").on('keydown', function(){
+        $(this).addClass("focus");
+    });
+    </script>
+  </body>
+</html>

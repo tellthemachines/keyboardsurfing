@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The outline thing</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href="assets/stylesheets/prism.css" rel="stylesheet">
+    <link href="assets/stylesheets/stylesheet.css" rel="stylesheet">
+  </head>
+  <body class="css-hover no-outline">
+      <a class="screen-read skip-link" href="#a11ynav" id="problematic">skip to accessible navigation</a>
+    <div class="container">
+    <nav class="topnav navbar" role="navigation">
+        <ul class="nav">
+            <li>
+                <a href="index">Home</a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Visibility</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="whatvisibility">the outline thing</a>
+                    </li>
+                    <li>
+                        <a href="visiblevisibility">the outline thing done properly</a>
+                    </li>
+                    <li>
+                        <a href="otherways">other ways</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Focusability</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="thecss">the css dropdown</a>
+                    </li>
+                    <li>
+                        <a href="premenufocusable">a first focusable dropdown</a>
+                    </li>
+                    <li>
+                        <a href="menufocusable">the definitive focusable dropdown</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Shortcuts</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="brokenskip">the broken skip link</a>
+                    </li>
+                    <li>
+                        <a href="workingskip">the working skip link</a>
+                    </li>
+                    <li>
+                        <a href="skipimproved">a further improvement?</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <main id="main-content" class="no-outline text-body" tabindex="-1">
+        <h1>the outline thing</h1>
+        <p>There are some navigation links at the top of the page, and if you hover over them you can see some dropdown menus opening below. Now try tabbing to achieve the same effect. Nothing happens, right?</p>
+        <p>No, wait, you say. I can see the link urls appearing at the bottom right hand side of the browser window. But the urls reference the current page. That means they are not really linking anywhere, and all the real links are in the dropdowns below, that we can't access with the keyboard.</p>
+        <p>So what's actually wrong here? First, the dropdowns are not getting activated by keyboard focus on those top links so we can't see or tab to the real links inside.</p>
+        <p>Second, although those top links themselves are getting focused, as we can tell by the minute indication of a url appearing at the bottom of the page, there is no visual indication of what link we are on at any moment. And for that, the culprit is often this snippet of code:</p>
+        <div class="code-view">
+<pre><code class="language-css">:focus {
+    outline: none;
+}</code></pre>
+        </div>
+        <p>The main motivation for its use may be the inconsistency of outline styles across browsers. Chrome, Safari and Opera use thick blue outlines; Firefox and IE discreet dotted outlines. Input elements will receive these styles whenever they are being used, and sometimes buttons will stay outlined after they have been clicked.</p>
+        <p>Designers tend to get upset over these unsolicited occurrences, and the undesirable outlines get removed altogether. That's OK, as long as we define a visible focus indicator of our own.</p>
+    </main>
+    <div class="pagination">
+        <a class="next" href="visiblevisibility">next page</a>
+    </div>
+    <nav class="bottomnav otherways working-menu" id="a11ynav" tabindex="0">
+        <ul class="nav">
+            <li>
+                <a href="index">Home</a>
+            </li>
+            <li class="">
+                <a class="dropdown-toggle" href="#">Visibility</a>
+                <ul class="sub-nav">
+                    <li>
+                        <a href="whatvisibility">the outline thing</a>
+                    </li>
+                    <li>
+                        <a href="visiblevisibility">the outline thing done properly</a>
+                    </li>
+                    <li>
+                        <a href="otherways">other ways</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a class="dropdown-toggle" href="#">Focusability</a>
+                <ul class="sub-nav">
+                    <li>
+                        <a href="thecss">the css dropdown</a>
+                    </li>
+                    <li>
+                        <a href="premenufocusable">a first focusable dropdown</a>
+                    </li>
+                    <li>
+                        <a href="menufocusable">the definitive focusable dropdown</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a class="dropdown-toggle" href="#">Shortcuts</a>
+                <ul class="sub-nav">
+                    <li>
+                        <a href="brokenskip">the broken skip link</a>
+                    </li>
+                    <li>
+                        <a href="workingskip">the working skip link</a>
+                    </li>
+                    <li>
+                        <a href="skipimproved">a further improvement?</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+    <script src="assets/scripts/libs/jquery-1.11.3.min.js"></script>
+    <script src="assets/scripts/libs/prism.js"></script>
+    <script>
+    $("#problematic").on('click', function(){
+        $(".bottomnav").addClass("focus");
+    });
+    $(".bottomnav").on('keydown', function(){
+        $(this).addClass("focus");
+    });
+    </script>
+
+  </body>
+</html>

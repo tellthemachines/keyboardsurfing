@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>proper outline things</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href="assets/stylesheets/prism.css" rel="stylesheet">
+    <link href="assets/stylesheets/stylesheet.css" rel="stylesheet">
+  </head>
+  <body class="css-hover">
+      <a class="screen-read skip-link" href="#a11ynav" id="problematic">skip to accessible navigation</a>
+    <div class="container">
+    <nav class="topnav navbar outline" role="navigation">
+        <ul class="nav">
+            <li>
+                <a class="homein" href="index">Home</a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Visibility</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="whatvisibility">the outline thing</a>
+                    </li>
+                    <li>
+                        <a href="visiblevisibility">the outline thing done properly</a>
+                    </li>
+                    <li>
+                        <a href="otherways">other ways</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Focusability</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="thecss">the css dropdown</a>
+                    </li>
+                    <li>
+                        <a href="thejavascript">the javascript dropdown</a>
+                    </li>
+                    <li>
+                        <a href="premenufocusable">a first focusable dropdown</a>
+                    </li>
+                    <li>
+                        <a href="menufocusable">the definitive focusable dropdown</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#">Shortcuts</a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="brokenskip">the broken skip link</a>
+                    </li>
+                    <li>
+                        <a href="workingskip">the working skip link</a>
+                    </li>
+                    <li>
+                        <a href="skipimproved">a further improvement?</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <main id="main-content" class="text-body" tabindex="-1">
+        <h1>the outline thing done properly</h1>
+        <p>The best thing to do is style your outlines as you like: give them whatever colour and width best suits your website design; make them dotted or dashed, double or ridged.</p>
+
+<div class="code-view">
+<pre><code class="language-css">:focus {
+    outline: 2px solid #3782c4;
+}</code></pre>
+</div>
+
+    <p>For a sample of the diversity of available styles, click the button below. Keep clicking for more styles!</p>
+
+    <div class="buttons tehclicabel">
+        <button class="breeder btn btn-default btn-0">click me</button>
+    </div>
+    </main>
+    <div class="pagination">
+        <a class="previous" href="whatvisibility">previous page</a>
+        <a class="next" href="otherways">next page</a>
+    </div>
+    <nav class="bottomnav otherways working-menu no-outline" id="a11ynav" tabindex="0">
+        <ul class="nav">
+            <li>
+                <a href="index">Home</a>
+            </li>
+            <li class="">
+                <a class="dropdown-toggle" href="#">Visibility</a>
+                <ul class="sub-nav">
+                    <li>
+                        <a href="whatvisibility">the outline thing</a>
+                    </li>
+                    <li>
+                        <a href="visiblevisibility">the outline thing done properly</a>
+                    </li>
+                    <li>
+                        <a href="otherways">other ways</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a class="dropdown-toggle" href="#">Focusability</a>
+                <ul class="sub-nav">
+                    <li>
+                        <a href="thecss">the css dropdown</a>
+                    </li>
+                    <li>
+                        <a href="thejavascript">the javascript dropdown</a>
+                    </li>
+                    <li>
+                        <a href="premenufocusable">a first focusable dropdown</a>
+                    </li>
+                    <li>
+                        <a href="menufocusable">the definitive focusable dropdown</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="">
+                <a class="dropdown-toggle" href="#">Shortcuts</a>
+                <ul class="sub-nav">
+                    <li>
+                        <a href="brokenskip">the broken skip link</a>
+                    </li>
+                    <li>
+                        <a href="workingskip">the working skip link</a>
+                    </li>
+                    <li>
+                        <a href="skipimproved">a further improvement?</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+    <script src="assets/scripts/libs/jquery-1.11.3.min.js"></script>
+    <script src="assets/scripts/libs/prism.js"></script>
+    <script src="assets/scripts/colornames.js"></script>
+    <script>
+
+     $('.buttons').on('click', '.breeder', function(){
+         var width = Math.ceil(Math.random()*6+1);
+         var style = outlinestyles[Math.floor(Math.random()*outlinelen)];
+         var color = colornames[Math.floor(Math.random()*colorlen)];
+         var offset = Math.floor(Math.random()*9);
+         var tehbtn = $('<button></button>');
+         tehbtn.addClass('breeder btn btn-default');
+        tehbtn.text('click me');
+        tehbtn.css({'outline': width + 'px ' + style + ' ' + color, 'outlineOffset': offset });
+         tehbtn.appendTo('.buttons'); tehbtn.focus();
+     });
+
+    $("#problematic").on('click', function(){
+        $(".bottomnav").addClass("focus");
+    });
+    $(".bottomnav").on('keydown', function(){
+        $(this).addClass("focus");
+    });
+
+    </script>
+  </body>
+</html>

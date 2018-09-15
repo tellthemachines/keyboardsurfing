@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>home - the keyboard navigation project</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href="assets/stylesheets/prism.css" rel="stylesheet">
+    <link href="assets/stylesheets/stylesheet.css" rel="stylesheet">
+  </head>
+  <body class="working-menu no-outline">
+      <a class="screen-read skip-link" href="#main-content">skip to content</a>
+    <div class="container">
+        <nav class="topnav navbar" role="navigation">
+            <ul class="nav">
+                <li>
+                    <a href="index">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Visibility</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="whatvisibility">the outline thing</a>
+                        </li>
+                        <li>
+                            <a href="visiblevisibility">the outline thing done properly</a>
+                        </li>
+                        <li>
+                            <a href="otherways">other ways</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Focusability</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="thecss">the css dropdown</a>
+                        </li>
+                        <li>
+                            <a href="premenufocusable">a first focusable dropdown</a>
+                        </li>
+                        <li>
+                            <a href="menufocusable">the definitive focusable dropdown</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Shortcuts</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="brokenskip">the broken skip link</a>
+                        </li>
+                        <li>
+                            <a href="workingskip">the working skip link</a>
+                        </li>
+                        <li>
+                            <a href="skipimproved">a further improvement?</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <main id="main-content" class="no-outline text-body" tabindex="-1">
+            <h1>the keyboard navigation project</h1>
+            <p>Hello and welcome! This website is a demonstration of things that commonly go wrong with keyboard accessibility on the web. </p>
+            <h2>How does it work?</h2>
+            <p>Basic keyboard navigation happens by using the tab key to go through all the interactive elements on the page. These are most often links, buttons and form fields. HTML anchors, buttons and inputs all natively support keyboard interaction, so the structure is already in place for keyboard navigation to be possible. However, these native affordances are very easy to break.</p>
+            <p>The sections on this website describe and enact common problems encountered by keyboard users and provide straightforward solutions for these problems. The top navigation bar is used for demonstration purposes on the Visibility and Focusability sections; attempting to tab through it will reveal the issue being tackled on each page. For the Shortcuts section, the demonstration centres on skip links situated before the nav bar.</p>
+            <h2>How to get around</h2>
+            <p>Each section should be read sequentially, as they each start with a problem and work towards a solution. Visibility precedes Focusability as they both tackle the nav bar; Shortcuts is independent of the preceding sections.</p>
+            <p>As the top nav is inaccessible on the pages where it is being used as a demonstration, on these pages there is a "skip to navigation" link that reveals an accessible version of the nav bar beneath the main content.</p>
+            <h2>Additional info</h2>
+            <p>This project is an outgrowth from a demo I created for a talk about keyboard navigability at Web Directions 2015. It is very much a work in progress and I plan to add further problems and solutions over time.</p>
+            <h2>Questions?</h2>
+            <p><a href="https://twitter.com/ijayessbe">Tweet</a> stuff at me or email isabel at tellthemachines dot com.</p>
+        </main>
+
+    </div>
+    <script src="assets/scripts/libs/jquery-1.11.3.min.js"></script>
+    <script src="assets/scripts/libs/prism.js"></script>
+    <script>
+    $(".dropdown").find("a").on("focus blur", function() {
+        $(this).parents("li").toggleClass("focus");
+    });
+    </script>
+  </body>
+</html>

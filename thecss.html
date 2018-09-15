@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>the css dropdown</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href="assets/stylesheets/prism.css" rel="stylesheet">
+    <link href="assets/stylesheets/stylesheet.css" rel="stylesheet">
+  </head>
+  <body class="css-hover css-focus no-outline">
+      <a class="screen-read skip-link" href="#a11ynav" id="problematic">skip to accessible navigation</a>
+    <div class="container">
+        <nav class="topnav navbar otherways" role="navigation">
+            <ul class="nav">
+                <li>
+                    <a href="index">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Visibility</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="whatvisibility">the outline thing</a>
+                        </li>
+                        <li>
+                            <a href="visiblevisibility">the outline thing done properly</a>
+                        </li>
+                        <li>
+                            <a href="otherways">other ways</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Focusability</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="thecss">the css dropdown</a>
+                        </li>
+                        <li>
+                            <a href="premenufocusable">a first focusable dropdown</a>
+                        </li>
+                        <li>
+                            <a href="menufocusable">the definitive focusable dropdown</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Shortcuts</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="brokenskip">the broken skip link</a>
+                        </li>
+                        <li>
+                            <a href="workingskip">the working skip link</a>
+                        </li>
+                        <li>
+                            <a href="skipimproved">a further improvement?</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <main id="main-content" class="no-outline text-body" tabindex="-1">
+            <h1>The CSS dropdown</h1>
+            <p>It's easy to style a dropdown to open on hover with just CSS:</p>
+<div class="code-view">
+<pre><code class="language-html"><span class="token tag"><span class="token punctuation"><</span>li<span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token punctuation"><</span>a <span class="token attr-name">href</span><span class="token punctuation">="</span>#<span class="token punctuation">"></span></span></span>Parent<span class="token tag"><span class="token punctuation"><</span><span class="token punctuation">/</span>a<span class="token punctuation">></span></span></span>
+    <span class="token tag"><span class="token punctuation"><</span>ul<span class="token punctuation">></span></span>
+        <span class="token tag"><span class="token punctuation"><</span>li<span class="token punctuation">></span></span>
+            <span class="token tag"><span class="token punctuation"><</span>a <span class="token attr-name">href</span><span class="token punctuation">="</span>#<span class="token punctuation">"></span></span></span>Child<span class="token tag"><span class="token punctuation"><</span><span class="token punctuation">/</span>a<span class="token punctuation">></span></span></span>
+        <span class="token tag"><span class="token punctuation"><</span><span class="token punctuation">/</span>li<span class="token punctuation">></span></span>
+    <span class="token tag"><span class="token punctuation"><</span><span class="token punctuation">/</span>ul<span class="token punctuation">></span></span>
+<span class="token tag"><span class="token punctuation"><</span><span class="token punctuation">/</span>li<span class="token punctuation">></span></span></code></pre>
+</div>
+
+<div class="code-view">
+<pre><code class="language-scss">li ul {
+    display: none;
+}
+li:hover ul {
+    display: block;
+}</code></pre>
+</div>
+<p>But, as we've already seen, this doesn't work for keyboard navigation. What if we apply the same styles to the focus state? Well, they can't be exactly the same: our hover styles are applied to the <code class="language-html"><span class="token tag"><span class="token punctuation"><</span>li<span class="token punctuation">></span></span></code> but that element isn't interactive so it doesn't have a focus state.</p>
+<p>The solution is to hook the styles to the focused <code class="language-html"><span class="token tag"><span class="token punctuation"><</span>a<span class="token punctuation">></span></span></code> instead, targeting its sibling:</p>
+<div class="code-view">
+<pre><code class="language-scss">li ul {
+    display: none;
+}
+li:hover ul,
+li a:focus + ul {
+    display: block;
+}</code></pre>
+</div>
+<p>At this point, tabbing through the top menu will reveal the dropdowns, but we still can't tab into them. Plus, if you're on Chrome, you won't be able to move past the second menu item as you will keep getting redirected to the first link on the page. Whoops.</p>
+<p>What's happening here? We attached the CSS that makes the dropdown visible to the focused state of the parent anchor. But this CSS will only be applied while that anchor is focused. As soon as we tab away from it, the dropdown gets hidden again.</p>
+<p>In addition to that, we're using <code class="language-scss">display: none;</code> to hide the dropdown, so its child anchors become unfocusable as soon as they are hidden. This explains Chrome's strange behaviour: when we tab away from the parent anchor, the next element in the tab order is the first child anchor in the dropdown, but as soon as we leave the parent anchor the child anchor becomes unfocusable. Chrome's default behaviour in this situation is to move focus back to the top of the page. Firefox moves focus to the next element, which at least avoids creating a keyboard trap. Even so, we need to find a better solution.</p>
+</main>
+<div class="pagination">
+    <a class="previous" href="otherways">previous page</a>
+    <a class="next" href="premenufocusable">next page</a>
+</div>
+<nav class="bottomnav otherways working-menu no-outline" id="a11ynav" tabindex="0">
+    <ul class="nav">
+        <li>
+            <a href="index">Home</a>
+        </li>
+        <li class="">
+            <a class="dropdown-toggle" href="#">Visibility</a>
+            <ul class="sub-nav">
+                <li>
+                    <a href="whatvisibility">the outline thing</a>
+                </li>
+                <li>
+                    <a href="visiblevisibility">the outline thing done properly</a>
+                </li>
+                <li>
+                    <a href="otherways">other ways</a>
+                </li>
+            </ul>
+        </li>
+        <li class="">
+            <a class="dropdown-toggle" href="#">Focusability</a>
+            <ul class="sub-nav">
+                <li>
+                    <a href="thecss">the css dropdown</a>
+                </li>
+                <li>
+                    <a href="premenufocusable">a first focusable dropdown</a>
+                </li>
+                <li>
+                    <a href="menufocusable">the definitive focusable dropdown</a>
+                </li>
+            </ul>
+        </li>
+        <li class="">
+            <a class="dropdown-toggle" href="#">Shortcuts</a>
+            <ul class="sub-nav">
+                <li>
+                    <a href="brokenskip">the broken skip link</a>
+                </li>
+                <li>
+                    <a href="workingskip">the working skip link</a>
+                </li>
+                <li>
+                    <a href="skipimproved">a further improvement?</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</nav>
+    </div>
+    <script src="assets/scripts/libs/jquery-1.11.3.min.js"></script>
+    <script src="assets/scripts/libs/prism.js"></script>
+    <script>
+    $("#problematic").on('click', function(){
+        $(".bottomnav").addClass("focus");
+    });
+    $(".bottomnav").on('keydown', function(){
+        $(this).addClass("focus");
+    });
+    </script>
+  </body>
+</html>

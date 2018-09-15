@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>broken skip link</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href="assets/stylesheets/prism.css" rel="stylesheet">
+    <link href="assets/stylesheets/stylesheet.css" rel="stylesheet">
+  </head>
+  <body class="working-menu">
+      <a class="screen-read skip-link" href="#main-content">skip to content</a>
+    <div class="container">
+        <nav class="topnav navbar no-outline otherways" role="navigation">
+            <ul class="nav">
+                <li>
+                    <a href="index">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Visibility</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="whatvisibility">the outline thing</a>
+                        </li>
+                        <li>
+                            <a href="visiblevisibility">the outline thing done properly</a>
+                        </li>
+                        <li>
+                            <a href="otherways">other ways</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Focusability</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="thecss">the css dropdown</a>
+                        </li>
+                        <li>
+                            <a href="premenufocusable">a first focusable dropdown</a>
+                        </li>
+                        <li>
+                            <a href="menufocusable">the definitive focusable dropdown</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Shortcuts</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="brokenskip">the broken skip link</a>
+                        </li>
+                        <li>
+                            <a href="workingskip">the working skip link</a>
+                        </li>
+                        <li>
+                            <a href="skipimproved">a further improvement?</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <main id="main-content" class="no-outline text-body">
+            <h1>the broken skip link</h1>
+
+            <p>Skip links are incredibly useful when there are large navigation menus you don't want to force your users to tab through on every page. And they are incredibly easy to implement: the only thing you need is a link right at the top of the page, linking to the <code  class="language-html">id</code> of the main section.</p>
+<div class="code-view">
+    <pre><code  class="language-html"><span class="token tag"><span class="token punctuation"><</span>a <span class="token attr-name">class</span><span class="token punctuation">="</span>skip-link<span class="token punctuation">"</span> <span class="token attr-name">href</span><span class="token punctuation">="</span>#main-content<span class="token punctuation">"></span></span></span>skip to content<span class="token tag"><span class="token punctuation"><</span><span class="token punctuation">/</span>a<span class="token punctuation">></span></span></span></code></pre>
+</div>
+
+    <p>Then, because you probably don't want it to be visible by default, hide it using the <a href="menufocusable">clip</a> technique and make it visible on focus:</p>
+
+<div class="code-view">
+<pre><code class="language-scss">.skip-link {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+.skip-link:focus {
+    clip: auto;
+}</code></pre>
+</div>
+<p>Now press enter on the link, and you'll be taken straight to the main content. But now try tabbing again. If you are on any browser except Firefox, you'll be taken straight back up to the top of the page. This is because most browsers, although they transfer visual focus to the main content, will keep keyboard focus where it was when we activated the skip link. How to solve this?</p>
+</main>
+<div class="pagination">
+    <a class="previous" href="menufocusable">previous page</a>
+    <a class="next" href="workingskip">next page</a>
+</div>
+    </div>
+    <script src="assets/scripts/libs/jquery-1.11.3.min.js"></script>
+    <script src="assets/scripts/libs/prism.js"></script>
+    <script>
+    $(".dropdown").find("a").on("focus blur", function() {
+        $(this).parents("li").toggleClass("focus");
+    });
+    </script>
+  </body>
+</html>

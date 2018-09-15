@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>working skip</title>
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href="assets/stylesheets/prism.css" rel="stylesheet">
+    <link href="assets/stylesheets/stylesheet.css" rel="stylesheet">
+  </head>
+  <body class="working-menu">
+      <a class="screen-read skip-link" href="#main-content">skip to content</a>
+    <div class="container">
+        <nav class="topnav navbar no-outline otherways" role="navigation">
+            <ul class="nav">
+                <li>
+                    <a href="index">Home</a>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Visibility</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="whatvisibility">the outline thing</a>
+                        </li>
+                        <li>
+                            <a href="visiblevisibility">the outline thing done properly</a>
+                        </li>
+                        <li>
+                            <a href="otherways">other ways</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Focusability</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="thecss">the css dropdown</a>
+                        </li>
+                        <li>
+                            <a href="premenufocusable">a first focusable dropdown</a>
+                        </li>
+                        <li>
+                            <a href="menufocusable">the definitive focusable dropdown</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" href="#">Shortcuts</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="brokenskip">the broken skip link</a>
+                        </li>
+                        <li>
+                            <a href="workingskip">the working skip link</a>
+                        </li>
+                        <li>
+                            <a href="skipimproved">a further improvement?</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <main id="main-content" class="text-body" tabindex="-1">
+            <h1>the working skip link</h1>
+            <p>The fix for this bug is very simple: just add the <code class="language-html">tabindex</code> attribute to the <code class="language-html"><span class="token tag"><span class="token punctuation"><</span>main<span class="token punctuation">></span></span></code> element, preferably giving it a negative value so it is removed from the tab order but still focusable.</p>
+<div class="code-view">
+    <pre><code class="language-html"><span class="token tag"><span class="token punctuation"><</span>main <span class="token attr-name">id</span><span class="token punctuation">="</span>main-content<span class="token punctuation">"</span> <span class="token attr-name">tabindex</span><span class="token punctuation">="</span>-1<span class="token punctuation">"></span></span></span></code></pre>
+</div>
+<p>Now the skip link works on all browsers. But wait! If you're on Chrome, you may have noticed a blue focus ring around the main content section when you tabbed to it. Whoops. That doesn't look awesome. But it's pretty easy to fix.</p>
+</main>
+<div class="pagination">
+    <a class="previous" href="brokenskip">previous page</a>
+    <a class="next" href="skipimproved">next page</a>
+</div>
+    </div>
+    <script src="assets/scripts/libs/jquery-1.11.3.min.js"></script>
+    <script src="assets/scripts/libs/prism.js"></script>
+    <script>
+    $(".dropdown").find("a").on("focus blur", function() {
+        $(this).parents("li").toggleClass("focus");
+    });
+    </script>
+  </body>
+</html>
