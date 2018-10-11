@@ -74,6 +74,7 @@ li.focus ul {
 }</code></pre>
 </div>
     <p>Using the <code class="language-scss">clip</code> property we reduce our dropdowns to effectively zero width and height, then when the <code class="language-scss">.focus</code> class is applied to the parent <code class="language-html"><span class="token tag"><span class="token punctuation"><</span>li<span class="token punctuation">></span></span></code> we turn it to auto, giving it back its original width and height. And that's it! The menu is now keyboard navigable on all known browsers.</p>
+    <p>Too easy, right? The problem with this technique is that <code class="language-scss">clip</code> is deprecated, and while it is still supported by most browsers it could disappear any time.</p>
     </main>
     <div class="pagination">
         <a class="previous" href="premenufocusable">previous page</a>
